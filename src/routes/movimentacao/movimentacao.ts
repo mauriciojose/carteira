@@ -15,6 +15,7 @@ class MovimentacoesRouter {
     }
     async init(){
         this.routes.post(this.path + '/', this.controller.transacao);
+        this.routes.get(this.path + '/:id', this.controller.getAll);
     }
 }
 

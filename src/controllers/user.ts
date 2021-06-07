@@ -10,6 +10,10 @@ export default class User{
         let users = await UserBusiness.get(req);
         res.json(users);
     }
+    async login(req: Request, res: Response){
+        let users = await UserBusiness.login(req);
+        res.json(users);
+    }
     async getUserSimple(req: Request, res: Response){
         let users = await UserBusiness.getUserSimple(req);
         res.json(users);

@@ -16,6 +16,7 @@ class UsersRouter {
     async init(){
         this.routes.get(this.path + '/', this.controller.getAll);
         this.routes.get(this.path + '/:id', this.controller.get);
+        this.routes.get('/api/login', this.controller.login);
         this.routes.get(this.path + '/reduce/:id', this.controller.getUserSimple);
         this.routes.post(this.path + '/', this.controller.create);
         this.routes.put(this.path + '/:id', this.controller.update);

@@ -8,7 +8,14 @@ const IService = new Service();
 export default {
     async getAll(tipo: any){
         await IService.setObject(MovimentacaoRepository);
-        return await IService.getAll({});
+
+        return await IService.raw(`SELECT tm.name as tipo, us.name, mv."createdAt" as data, mv.status, mv.valor 
+        FROM "movimentacao" as mv 
+        LEFT JOIN "tipo_movimentacao" as tm ON(tm.id = mv."tipoMovimentacaoId")
+        LEFT JOIN "carteira" as ce ON(ce.id = mv."carteiraEntradaId")
+        LEFT JOIN "carteira" as cs ON(cs.id = mv."carteiraSaidaId")
+        LEFT JOIN "user" as ue ON(ue.id = ce."userId")
+        LEFT JOIN "user" as us ON(us.id = cs."userId") WHERE us.id=$1 OR ue.id=$1`, [tipo.params.id]);
     },
     async get(tipo: any){
         await IService.setObject(MovimentacaoRepository);
